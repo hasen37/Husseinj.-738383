@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIXEL PRIME | شحن الألعاب</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+            <div class="logo" onclick="showHomePage()">HUSSEIN<span>STORE</span></div>
+            <div class="header-right">
+                <span class="online-status">System Online <span class="dot"></span></span>
+                <button class="order-history-btn" onclick="showOrderHistory()">سجل الطلبات</button>
+            </div>
+        </div>
+    </header>
+
+    <main id="homePage" class="container">
+        <h1 class="main-title">اختر اللعبة وابدأ الشحن</h1>
+        <div class="games-grid" id="gamesGrid">
+            </div>
+    </main>
+
+    <section id="detailsPage" class="container" style="display:none;">
+        <button onclick="showHomePage()" class="back-btn">⬅ العودة للمحور</button>
+        <div class="game-info-header">
+            <img id="detailGameImg" src="" alt="Game Image">
+            <h2 id="detailGameName"></h2>
+        </div>
+        <div class="packages-grid" id="packagesGrid">
+            </div>
+    </section>
+
+    <section id="orderHistoryPage" class="container" style="display:none;">
+        <button onclick="showHomePage()" class="back-btn">⬅ العودة للمحور</button>
+        <h1 class="main-title">سجل طلباتك</h1>
+        <div id="historyList" class="history-list">
+            <p class="no-orders-msg">لم تقم بأي طلبات بعد.</p>
+        </div>
+    </section>
+
+    <div id="orderModal" class="modal-overlay">
+        <div class="modal-card">
+            <h3>تأكيد الطلب</h3>
+            <p id="orderSummary" class="order-summary-text"></p>
+            
+            <div class="input-group">
+                <label for="playerId">Player ID:</label>
+                <input type="text" id="playerId" placeholder="أدخل ID اللاعب" required>
+                
+                <label for="playerName">Player Name:</label>
+                <input type="text" id="playerName" placeholder="اسمك في اللعبة (اختياري)">
+                
+                <label for="paymentMethod">Payment Method:</label>
+                <select id="paymentMethod">
+                    <option value="Asiacell">آسيا سيل (Asiacell)</option>
+                    <option value="Zain">زين أثير (Zain)</option>
+                </select>
+                
+                <label for="cardCode">Card Code:</label>
+                <input type="text" id="cardCode" placeholder="أدخل رمز كارت التعبئة هنا" class="neon-input">
+            </div>
+
+            <div class="modal-actions">
+                <button class="action-btn cancel-btn" onclick="closeModal()">إلغاء</button>
+                <button class="action-btn confirm-btn" onclick="sendOrder()">إرسال الطلب</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
