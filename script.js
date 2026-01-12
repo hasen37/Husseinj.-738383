@@ -94,15 +94,46 @@ function closeModal() {
 }
 
 function sendOrder() {
+    // 1. جمع البيانات من المدخلات
     const pId = document.getElementById('playerId').value;
     const pName = document.getElementById('playerName').value;
     const pMethod = document.getElementById('paymentMethod').value;
     const pCode = document.getElementById('cardCode').value;
 
+    // 2. التأكد من ملء البيانات الأساسية
     if (!pId || !pCode) {
         alert("يرجى ملء Player ID و Card Code!");
         return;
     }
+
+    // 3. رقم الهاتف الخاص بك (اكتبه بالصيغة الدولية بدون أصفار أو علامة +)
+    // مثال للعراق: 9647700000000
+    const myPhoneNumber = "9647881566981"; 
+
+    // 4. تنسيق نص الرسالة التي ستصلك
+    const message = `*طلب شحن جديد* 🎮%0A` +
+                    `--------------------------%0A` +
+                    `*اللعبة:* ${currentOrder.game}%0A` +
+                    `*الباقة:* ${currentOrder.qty}%0A` +
+                    `*السعر:* ${currentOrder.price}%0A` +
+                    `*ID اللاعب:* ${pId}%0A` +
+                    `*اسم اللاعب:* ${pName || "غير محدد"}%0A` +
+                    `*طريقة الدفع:* ${pMethod}%0A` +
+                    `*رمز الكارت:* \`${pCode}\` %0A` +
+                    `--------------------------`;
+
+    // 5. إنشاء رابط الواتساب وفتحه
+    const whatsappUrl = `https://wa.me/${myPhoneNumber}?text=${message}`;
+    
+    // فتح الرابط في نافذة جديدة
+    window.open(whatsappUrl, '_blank');
+
+    // (اختياري) حفظ الطلب في سجل الطلبات بالمتصفح قبل الانتقال
+    saveOrderLocally(pId, pMethod); 
+    
+    closeModal();
+}
+
 
     const templateParams = {
         game_name: currentOrder.game,
